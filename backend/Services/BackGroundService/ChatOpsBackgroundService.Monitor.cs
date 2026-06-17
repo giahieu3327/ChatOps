@@ -2,7 +2,13 @@ using ChatOps.Controllers;
 using ChatOps.Models;
 using ChatOps.Services.ChatService;
 using ChatOps.Services.SystemService;
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AppContext = ChatOps.Data.AppContext;
 
 namespace ChatOps.Services.BackGroundService
@@ -103,7 +109,10 @@ namespace ChatOps.Services.BackGroundService
 
             LogService.LogService.WriteAppLog(app, $"📊 [CPU MONITOR] LB_COUNT={lbList.Count} (MAX_CPU={maxLbCpu:F1}%) | WEB_COUNT={webList.Count} (MAX_CPU={maxWebCpu:F1}%) | BACKEND_COUNT={backendList.Count} (MAX_CPU={maxBackendCpu:F1}%)");
 
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{app}";
+            // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC RUNTIME CỦA APP
+            string userHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string runtimeDir = Path.Combine(userHomePath, "ChatOps", "docker", "Apps", app);
+            
             string coreComposeFile = File.Exists(Path.Combine(runtimeDir, "docker-registry.yml")) ? "docker-registry.yml" : "docker-git.yml";
             string lbComposeFile = "docker-compose-lb.yml";
 
