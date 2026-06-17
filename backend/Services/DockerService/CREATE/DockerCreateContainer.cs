@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using ChatOps.Services.FileService;
 using ChatOps.Services.SystemService;
 using ChatOps.Services.RedisService;
@@ -6,6 +10,31 @@ namespace ChatOps.Services.DockerService.Create
 {
     public static class DockerCreateContainer
     {
+        // Hàm cấu trúc hóa dữ liệu đường dẫn động để tái sử dụng, tránh trùng lặp mã nguồn
+        private class RuntimePathConfig
+        {
+            public string RuntimeDir { get; set; } = string.Empty;
+            public string LbSubDir { get; set; } = string.Empty;
+            public string LogDir { get; set; } = string.Empty;
+            public string TemplateLbFile { get; set; } = string.Empty;
+            public string DestLbFile { get; set; } = string.Empty;
+        }
+
+        private static RuntimePathConfig GetAppRuntimePaths(string appName)
+        {
+            string userHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string runtimeDir = Path.Combine(userHomePath, "ChatOps", "docker", "Apps", appName);
+            
+            return new RuntimePathConfig
+            {
+                RuntimeDir = runtimeDir,
+                LbSubDir = Path.Combine(runtimeDir, "lb"),
+                LogDir = Path.Combine(runtimeDir, "logs"),
+                TemplateLbFile = Path.Combine(userHomePath, "ChatOps", "services", "LB", "docker-compose-lb.yml"),
+                DestLbFile = Path.Combine(runtimeDir, "docker-compose-lb.yml")
+            };
+        }
+
         // =================================================================================
         // 1. DEPLOY SINGLE: Chạy container dịch vụ đơn lẻ (Nginx, MySQL, PgAdmin, v.v.)
         // =================================================================================
@@ -49,35 +78,29 @@ namespace ChatOps.Services.DockerService.Create
             string IMGBACKEND,
             string IMGWEB,
             string IMGLB,
-            bool isDebug,         // Bổ sung tham số để đẩy log qua Redis
-            string connectionId)  // Bổ sung tham số để đẩy log qua Redis
+            bool isDebug,         
+            string connectionId)  
         {
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{appName}";
-            string lbSubDir = Path.Combine(runtimeDir, "lb");
-            string logDir = Path.Combine(runtimeDir, "logs");
-
+            var paths = GetAppRuntimePaths(appName);
             string templateAppFile = Path.Combine(projectPath.Trim(), "docker-git.yml");
-            string templateLbFile = "/home/ubuntu/ChatOps/services/LB/docker-compose-lb.yml";
-
-            string destAppFile = Path.Combine(runtimeDir, "docker-git.yml");
-            string destLbFile = Path.Combine(runtimeDir, "docker-compose-lb.yml");
+            string destAppFile = Path.Combine(paths.RuntimeDir, "docker-git.yml");
 
             try
             {
                 // =====================================================
                 // PREPARE FILES
                 // =====================================================
-                await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, $"📂 [Docker Engine] Đang khởi tạo và chuẩn bị cấu trúc thư mục runtime tại `{runtimeDir}`...");
+                await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, $"📂 [Docker Engine] Đang khởi tạo và chuẩn bị cấu trúc thư mục runtime tại `{paths.RuntimeDir}`...");
 
                 string result = await LoadBalancerFileService.PrepareRuntimeDirectory(
-                    runtimeDir,
-                    lbSubDir,
-                    logDir,
+                    paths.RuntimeDir,
+                    paths.LbSubDir,
+                    paths.LogDir,
                     projectPath,
                     templateAppFile,
                     destAppFile,
-                    templateLbFile,
-                    destLbFile);
+                    paths.TemplateLbFile,
+                    paths.DestLbFile);
 
                 if (result != "Success")
                     return result;
@@ -119,7 +142,7 @@ namespace ChatOps.Services.DockerService.Create
                 await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, $"⚙️ [Docker Engine] Sinh file cấu hình định tuyến Nginx nội bộ ({nginxTarget.Frontend}:{nginxTarget.FrontendPort} -> {nginxTarget.Backend}:{nginxTarget.BackendPort})...");
 
                 await LoadBalancerFileService.GenerateNginxConfigAsync(
-                    lbSubDir,
+                    paths.LbSubDir,
                     nginxTarget.Frontend,
                     nginxTarget.FrontendPort,
                     nginxTarget.Backend,
@@ -128,7 +151,7 @@ namespace ChatOps.Services.DockerService.Create
                 // =====================================================
                 // GENERATE LB DOCKERFILE
                 // =====================================================
-                await LoadBalancerFileService.GenerateLbDockerfileAsync(lbSubDir);
+                await LoadBalancerFileService.GenerateLbDockerfileAsync(paths.LbSubDir);
 
                 // =====================================================
                 // GENERATE ENV
@@ -136,7 +159,7 @@ namespace ChatOps.Services.DockerService.Create
                 await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, "📝 [Docker Engine] Đang kết xuất và đồng bộ tệp biến môi trường `.env`...");
 
                 await LoadBalancerFileService.WriteEnvFileAsync(
-                    runtimeDir,
+                    paths.RuntimeDir,
                     appName,
                     IMGDB,
                     IMGBACKEND,
@@ -149,9 +172,9 @@ namespace ChatOps.Services.DockerService.Create
                 // =====================================================
                 // PERMISSION
                 // =====================================================
-                await SystemCommandService.RunAsync($"chmod -R 777 {runtimeDir}");
+                await SystemCommandService.RunAsync($"chmod -R 777 {paths.RuntimeDir}");
 
-                string cdCmd = $"cd {runtimeDir}";
+                string cdCmd = $"cd {paths.RuntimeDir}";
 
                 // =====================================================
                 // DEPLOY APP
@@ -211,35 +234,29 @@ namespace ChatOps.Services.DockerService.Create
             string IMGBACKEND,
             string IMGWEB,
             string IMGLB,
-            bool isDebug,         // Bổ sung tham số để đồng bộ log
-            string connectionId)  // Bổ sung tham số để đồng bộ log
+            bool isDebug,         
+            string connectionId)  
         {
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{appName}";
-            string lbSubDir = Path.Combine(runtimeDir, "lb");
-            string logDir = Path.Combine(runtimeDir, "logs");
-
+            var paths = GetAppRuntimePaths(appName);
             string templateAppFile = Path.Combine(projectPath.Trim(), "docker-registry.yml");
-            string templateLbFile = "/home/ubuntu/ChatOps/services/LB/docker-compose-lb.yml";
-
-            string destAppFile = Path.Combine(runtimeDir, "docker-registry.yml");
-            string destLbFile = Path.Combine(runtimeDir, "docker-compose-lb.yml");
+            string destAppFile = Path.Combine(paths.RuntimeDir, "docker-registry.yml");
 
             try
             {
                 // =====================================================
                 // PREPARE FILES
                 // =====================================================
-                await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, $"📂 [Docker Registry] Chuẩn bị không gian lưu trữ cho Production tại `{runtimeDir}`...");
+                await RedisChannelService.SendMessageToClientAsync(isDebug, connectionId, $"📂 [Docker Registry] Chuẩn bị không gian lưu trữ cho Production tại `{paths.RuntimeDir}`...");
 
                 string result = await LoadBalancerFileService.PrepareRuntimeDirectory(
-                    runtimeDir,
-                    lbSubDir,
-                    logDir,
+                    paths.RuntimeDir,
+                    paths.LbSubDir,
+                    paths.LogDir,
                     projectPath,
                     templateAppFile,
                     destAppFile,
-                    templateLbFile,
-                    destLbFile);
+                    paths.TemplateLbFile,
+                    paths.DestLbFile);
 
                 if (result != "Success")
                     return result;
@@ -277,7 +294,7 @@ namespace ChatOps.Services.DockerService.Create
                 // GENERATE NGINX CONFIG
                 // =====================================================
                 await LoadBalancerFileService.GenerateNginxConfigAsync(
-                    lbSubDir,
+                    paths.LbSubDir,
                     nginxTarget.Frontend,
                     nginxTarget.FrontendPort,
                     nginxTarget.Backend,
@@ -286,13 +303,13 @@ namespace ChatOps.Services.DockerService.Create
                 // =====================================================
                 // GENERATE LB DOCKERFILE
                 // =====================================================
-                await LoadBalancerFileService.GenerateLbDockerfileAsync(lbSubDir);
+                await LoadBalancerFileService.GenerateLbDockerfileAsync(paths.LbSubDir);
 
                 // =====================================================
                 // GENERATE ENV
                 // =====================================================
                 await LoadBalancerFileService.WriteEnvFileAsync(
-                    runtimeDir,
+                    paths.RuntimeDir,
                     appName,
                     IMGDB,
                     IMGBACKEND,
@@ -305,9 +322,9 @@ namespace ChatOps.Services.DockerService.Create
                 // =====================================================
                 // PERMISSION
                 // =====================================================
-                await SystemCommandService.RunAsync($"chmod -R 777 {runtimeDir}");
+                await SystemCommandService.RunAsync($"chmod -R 777 {paths.RuntimeDir}");
 
-                string cdCmd = $"cd {runtimeDir}";
+                string cdCmd = $"cd {paths.RuntimeDir}";
 
                 // =====================================================
                 // DEPLOY APP
