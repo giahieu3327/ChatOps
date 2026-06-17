@@ -1,4 +1,9 @@
-﻿using ChatOps.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using ChatOps.Models;
 using ChatOps.Services.RedisService;
 using ChatOps.Services.SystemService;
 using AppContext = ChatOps.Data.AppContext;
@@ -12,6 +17,7 @@ namespace ChatOps.Services.ChatService
             await Task.Delay(100);
             await RedisChannelService.SendMessageToClientAsync(debug, connectionId, message);
         }
+
         public static async Task<string> CreateBackup(Dictionary<string, string> parsed, UserSession session, string connectionId)
         {
             await SendLogWithDelayAsync(session.Debug, connectionId, $"⏳ [Node {AppContext.ServerID}] Khởi động pipeline lệnh tạo bản sao lưu (CreateBackup)...");
@@ -101,7 +107,10 @@ namespace ChatOps.Services.ChatService
 
             ContainerMetadata? metadata = await DockerService.Read.DockerReadMetadata.GetMetadataAsync(instanceTarget);
 
-            string backupFolder = Path.Combine("/home/ubuntu/ChatOps/docker/Apps", instanceTarget, "backups");
+            // ĐỘNG HÓA ĐƯỜNG DẪN LƯU TRỮ BACKUP
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string backupFolder = Path.Combine(userHome, "ChatOps", "docker", "Apps", instanceTarget, "backups");
+            
             if (!Directory.Exists(backupFolder)) return $"❌ Chưa có bản backup nào cho: {instanceTarget}";
 
             var files = Directory.GetFiles(backupFolder, "*.sql")
@@ -132,7 +141,14 @@ namespace ChatOps.Services.ChatService
                 return "❌ Thiếu tham số 'instance' hoặc 'tag' bắt buộc.";
             }
 
-            string backupFolder = Path.Combine("/home/ubuntu/ChatOps/docker/Apps", instanceTarget, "backups");
+            // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC BACKUP ĐỂ TRA CỨU FILE
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string backupFolder = Path.Combine(userHome, "ChatOps", "docker", "Apps", instanceTarget, "backups");
+
+            if (!Directory.Exists(backupFolder))
+            {
+                return $"❌ Thư mục backup cho instance '{instanceTarget}' không tồn tại trên hệ thống.";
+            }
 
             var backupFile = Directory.GetFiles(backupFolder, $"*{tag}*.sql")
                                     .Select(f => new FileInfo(f))
@@ -237,7 +253,10 @@ namespace ChatOps.Services.ChatService
                 }
             }
 
-            string backupFolder = Path.Combine("/home/ubuntu/ChatOps/docker/Apps", instanceTarget, "backups");
+            // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC BACKUP ĐỂ THỰC THI XÓA FILE
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string backupFolder = Path.Combine(userHome, "ChatOps", "docker", "Apps", instanceTarget, "backups");
+            
             if (!Directory.Exists(backupFolder))
             {
                 return $"❌ Thư mục backup cho instance '{instanceTarget}' không tồn tại.";
