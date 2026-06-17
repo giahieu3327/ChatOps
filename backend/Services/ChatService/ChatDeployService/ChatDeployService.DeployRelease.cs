@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using ChatOps.Data;
 using AppContext = ChatOps.Data.AppContext;
 using ChatOps.Models;
@@ -15,6 +20,7 @@ namespace ChatOps.Services.ChatService
             await Task.Delay(100);
             await RedisChannelService.SendMessageToClientAsync(debug, connectionId, message);
         }
+
         public static async Task<string> Release(Dictionary<string, string> parsed, UserSession session, string connectionId)
         {
             await SendLogWithDelayAsync(session.Debug, connectionId, $"⏳ [Node {AppContext.ServerID}] Khởi động Pipeline phát hành ứng dụng (Release)...");
@@ -38,8 +44,10 @@ namespace ChatOps.Services.ChatService
                 return $"❌ Định dạng tag `{tag}` không hợp lệ. Vui lòng sử dụng chuẩn Semantic Versioning (Ví dụ: 1.0.0, 2.1.4).";
             }
 
-            string trialPath = $"/home/ubuntu/ChatOps/services/Trial/{service}";
-            string finalPath = $"/home/ubuntu/ChatOps/services/Final/{service}";
+            // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC KHÔNG GIAN LƯU TRỮ
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string trialPath = Path.Combine(userHome, "ChatOps", "services", "Trial", service);
+            string finalPath = Path.Combine(userHome, "ChatOps", "services", "Final", service);
 
             if (!Directory.Exists(trialPath))
             {
@@ -125,7 +133,8 @@ namespace ChatOps.Services.ChatService
                 return transformResult;
             }
 
-            return $"✅ Phát hành ứng dụng '{service}' phiên bản `{tag}` thành công!\n📂 Thư mục sản xuất: `{finalPath}`";
+            string displayFinalPath = finalPath.Replace('\\', '/');
+            return $"✅ Phát hành ứng dụng '{service}' phiên bản `{tag}` thành công!\n📂 Thư mục sản xuất: `{displayFinalPath}`";
         }
 
         public static async Task<string> ListRelease(Dictionary<string, string> parsed, UserSession session, string connectionId)
@@ -250,7 +259,8 @@ namespace ChatOps.Services.ChatService
                     await RedisAppService.UpdateAppValueAsync(service, appConfig.Url, appConfig.ServiceType, false);
                 }
 
-                string finalPath = $"/home/ubuntu/ChatOps/services/Final/{service}";
+                string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string finalPath = Path.Combine(userHome, "ChatOps", "services", "Final", service);
                 if (Directory.Exists(finalPath))
                 {
                     try
