@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using ChatOps.Services.SystemService;
 
 namespace ChatOps.Services.DockerService.Delete
@@ -58,7 +61,10 @@ namespace ChatOps.Services.DockerService.Delete
             }
 
             appName = appName.Trim();
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{appName}";
+
+            // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC HOME
+            string userHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string runtimeDir = Path.Combine(userHomePath, "ChatOps", "docker", "Apps", appName);
 
             if (!Directory.Exists(runtimeDir))
             {
