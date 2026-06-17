@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using ChatOps.Services.SystemService;
 
 namespace ChatOps.Services.FileService
@@ -7,6 +11,13 @@ namespace ChatOps.Services.FileService
     /// </summary>
     public static class PgAdminFileConfigurator
     {
+        // Hàm phụ trợ để lấy đường dẫn gốc động tránh lặp code
+        private static string GetBaseContainersDirectory()
+        {
+            string userHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            return Path.Combine(userHomePath, "ChatOps", "docker", "Containers");
+        }
+
         /// <summary>
         /// Khởi tạo thư mục làm việc và kết xuất tệp cấu hình tự động liên kết máy chủ hàng loạt cho pgAdmin.
         /// Hỗ trợ xử lý bất đồng bộ thực sự (True Async I/O).
@@ -18,7 +29,7 @@ namespace ChatOps.Services.FileService
                 return "❌ Danh sách DB máy chủ trống.";
             }
 
-            string baseDir = Path.Combine("/home/ubuntu/ChatOps/docker/Containers", containerName, "pgadmin-data");
+            string baseDir = Path.Combine(GetBaseContainersDirectory(), containerName, "pgadmin-data");
             if (!Directory.Exists(baseDir))
             {
                 Directory.CreateDirectory(baseDir);
@@ -82,6 +93,7 @@ namespace ChatOps.Services.FileService
 
             return jsonFile;
         }
+
         /// <summary>
         /// Đọc tệp cấu hình servers.json và bóc tách chính xác dựa trên định dạng của trường Host.
         /// Chuyển dịch toàn bộ sang Async I/O thuần túy.
@@ -89,7 +101,7 @@ namespace ChatOps.Services.FileService
         public static async Task<List<string>> GetAttachedHosts(string containerName)
         {
             var attachedDbs = new List<string>();
-            string jsonFile = Path.Combine("/home/ubuntu/ChatOps/docker/Containers", containerName, "pgadmin-data", "servers.json");
+            string jsonFile = Path.Combine(GetBaseContainersDirectory(), containerName, "pgadmin-data", "servers.json");
 
             if (!System.IO.File.Exists(jsonFile))
             {
@@ -134,6 +146,5 @@ namespace ChatOps.Services.FileService
 
             return attachedDbs;
         }
-    
     }
 }
