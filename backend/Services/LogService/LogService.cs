@@ -4,7 +4,10 @@ namespace ChatOps.Services.LogService
     public static class LogService
     {
         private static readonly object LockObj = new();
-        private const string BaseAppLogPath = "/home/ubuntu/ChatOps/docker/Apps";
+        private static readonly string BaseAppLogPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), 
+            "ChatOps", "docker", "Apps"
+        );
 
         private static string GetLogFolderPath(string app)
         {
