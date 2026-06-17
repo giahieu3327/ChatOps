@@ -810,7 +810,10 @@ namespace ChatOps.Services.ChatService
         {
             try
             {
-                string appDir = Path.Combine("/home/ubuntu/ChatOps/docker/Apps", instanceApp);
+                // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC APPS
+                string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string appDir = Path.Combine(userHome, "ChatOps", "docker", "Apps", instanceApp);
+                
                 if (Directory.Exists(appDir))
                 {
                     Directory.Delete(appDir, true);
@@ -829,7 +832,10 @@ namespace ChatOps.Services.ChatService
             {
                 try
                 {
-                    string targetDir = Path.Combine("/home/ubuntu/ChatOps/docker/Containers", containerName);
+                    // ĐỘNG HÓA ĐƯỜNG DẪN THƯ MỤC CONTAINERS
+                    string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                    string targetDir = Path.Combine(userHome, "ChatOps", "docker", "Containers", containerName);
+                    
                     if (Directory.Exists(targetDir))
                     {
                         Directory.Delete(targetDir, true);
@@ -921,7 +927,8 @@ namespace ChatOps.Services.ChatService
                 result.Add($"✅ Target Container Update Scheduled: {name} -> {targetLogValue}");
             }
 
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{instanceFilter}";
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string runtimeDir = Path.Combine(userHome, "ChatOps", "docker", "Apps", instanceFilter);
             string envPath = Path.Combine(runtimeDir, ".env");
             bool isEnvUpdated = false;
 
