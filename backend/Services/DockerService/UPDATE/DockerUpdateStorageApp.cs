@@ -1,9 +1,19 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using ChatOps.Services.SystemService;
 
 namespace ChatOps.Services.DockerService.Update
 {
     public static class DockerUpdateStorageApp
     {
+        // Hàm phụ trợ lấy đường dẫn runtime động của ứng dụng tránh lặp code
+        private static string GetAppRuntimeDirectory(string appName)
+        {
+            string userHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            return Path.Combine(userHomePath, "ChatOps", "docker", "Apps", appName);
+        }
+
         public static async Task<string> CopyFileToContainerAsync(string hostPath, string containerName, string containerPath)
         {
             if (string.IsNullOrWhiteSpace(hostPath) || string.IsNullOrWhiteSpace(containerName) || string.IsNullOrWhiteSpace(containerPath))
@@ -58,7 +68,7 @@ namespace ChatOps.Services.DockerService.Update
 
             LogService.LogService.WriteAppLog(app, "🚨 DATABASE DOWN → ATTEMPTING RESTART VIA DOCKER COMPOSE");
 
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{app}";
+            string runtimeDir = GetAppRuntimeDirectory(app);
             if (!Directory.Exists(runtimeDir)) return;
 
             string gitCompose = Path.Combine(runtimeDir, "docker-git.yml");
@@ -74,14 +84,21 @@ namespace ChatOps.Services.DockerService.Update
 
         public static async Task<string> CreateInstanceBackupAsync(string instanceTarget, string tag, string containerId, string dbType)
         {
-            string backupFolder = Path.Combine("/home/ubuntu/ChatOps/docker/Apps", instanceTarget, "backups");
+            if (string.IsNullOrWhiteSpace(instanceTarget))
+            {
+                return "❌ Tên ứng dụng mục tiêu không được để trống.";
+            }
+
+            string runtimeDir = GetAppRuntimeDirectory(instanceTarget.Trim());
+            string backupFolder = Path.Combine(runtimeDir, "backups");
+            
             if (!Directory.Exists(backupFolder))
             {
                 Directory.CreateDirectory(backupFolder);
             }
 
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-            string fileName = $"{instanceTarget}_{dbType}_{tag}_{timestamp}.sql";
+            string fileName = $"{instanceTarget.Trim()}_{dbType}_{tag}_{timestamp}.sql";
             string backupPath = Path.Combine(backupFolder, fileName);
             string backupCommand = "";
 
