@@ -1,9 +1,15 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChatOps.Services.LogService
 {
     public static class LogService
     {
         private static readonly object LockObj = new();
+        
+        // Tự động cấu hình đường dẫn động dựa theo thư mục Home của User thực thi hệ thống
         private static readonly string BaseAppLogPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), 
             "ChatOps", "docker", "Apps"
