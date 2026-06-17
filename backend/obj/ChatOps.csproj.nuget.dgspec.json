@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ubuntu/ChatOps/backend/ChatOps.csproj": {}
+    "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj": {}
   },
   "projects": {
-    "/home/ubuntu/ChatOps/backend/ChatOps.csproj": {
+    "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ubuntu/ChatOps/backend/ChatOps.csproj",
+        "projectUniqueName": "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj",
         "projectName": "ChatOps",
-        "projectPath": "/home/ubuntu/ChatOps/backend/ChatOps.csproj",
-        "packagesPath": "/home/ubuntu/.nuget/packages/",
-        "outputPath": "/home/ubuntu/ChatOps/backend/obj/",
+        "projectPath": "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj",
+        "packagesPath": "/home/chatopsnode1/.nuget/packages/",
+        "outputPath": "/home/chatopsnode1/ChatOps/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+          "/home/chatopsnode1/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[2.13.1, )"
             },
+            "StackExchange.Redis.Extensions.Core": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -100,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.128/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,10 +12,11 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.7",
           "Microsoft.AspNetCore.OpenApi": "8.0.25",
           "Microsoft.AspNetCore.SignalR.Core": "1.2.10",
-          "Microsoft.EntityFrameworkCore": "8.0.27",
-          "Microsoft.EntityFrameworkCore.Design": "8.0.27",
+          "Microsoft.EntityFrameworkCore": "8.0.28",
+          "Microsoft.EntityFrameworkCore.Design": "8.0.28",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.11",
           "StackExchange.Redis": "2.13.1",
+          "StackExchange.Redis.Extensions.Core": "12.2.0",
           "Swashbuckle.AspNetCore": "6.6.2",
           "YamlDotNet": "17.1.0"
         },
@@ -334,53 +335,53 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/8.0.27": {
+      "Microsoft.EntityFrameworkCore/8.0.28": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.27",
-          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.27",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.28",
+          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.28",
           "Microsoft.Extensions.Caching.Memory": "8.0.1",
           "Microsoft.Extensions.Logging": "8.0.1"
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.dll": {
-            "assemblyVersion": "8.0.27.0",
-            "fileVersion": "8.0.2726.23001"
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.2826.26502"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Abstractions/8.0.28": {
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-            "assemblyVersion": "8.0.27.0",
-            "fileVersion": "8.0.2726.23001"
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.2826.26502"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/8.0.27": {},
-      "Microsoft.EntityFrameworkCore.Design/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Analyzers/8.0.28": {},
+      "Microsoft.EntityFrameworkCore.Design/8.0.28": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.5.0",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.27",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.28",
           "Microsoft.Extensions.DependencyModel": "8.0.2",
           "Mono.TextTemplating": "2.2.1"
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "8.0.27.0",
-            "fileVersion": "8.0.2726.23001"
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.2826.26502"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Relational/8.0.28": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.27",
+          "Microsoft.EntityFrameworkCore": "8.0.28",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "8.0.27.0",
-            "fileVersion": "8.0.2726.23001"
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.2826.26502"
           }
         }
       },
@@ -579,9 +580,9 @@
       },
       "Npgsql.EntityFrameworkCore.PostgreSQL/8.0.11": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.27",
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.27",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.27",
+          "Microsoft.EntityFrameworkCore": "8.0.28",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.28",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.28",
           "Npgsql": "8.0.6"
         },
         "runtime": {
@@ -612,6 +613,17 @@
           "lib/net8.0/StackExchange.Redis.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.13.1.38939"
+          }
+        }
+      },
+      "StackExchange.Redis.Extensions.Core/12.2.0": {
+        "dependencies": {
+          "StackExchange.Redis": "2.13.1"
+        },
+        "runtime": {
+          "lib/net8.0/StackExchange.Redis.Extensions.Core.dll": {
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
@@ -889,40 +901,40 @@
       "path": "microsoft.codeanalysis.workspaces.common/4.5.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore/8.0.27": {
+    "Microsoft.EntityFrameworkCore/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fe3vhlibOcspurgPucQQW4KGC3Z2aj3hafb68AKxFVFawzT5+x6FA4NGzLrWMDs682A3uTodd0hOHX0ZUDwdzA==",
-      "path": "microsoft.entityframeworkcore/8.0.27",
-      "hashPath": "microsoft.entityframeworkcore.8.0.27.nupkg.sha512"
+      "sha512": "sha512-rC28OvTXi/6+C8cisqZ/dr69aP8d0suvkFkGu2dBHa4UFwPZVt9cqni4pYwp9Hd3CuJ+NRDCn7YtwSexoBn/Hw==",
+      "path": "microsoft.entityframeworkcore/8.0.28",
+      "hashPath": "microsoft.entityframeworkcore.8.0.28.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/8.0.27": {
+    "Microsoft.EntityFrameworkCore.Abstractions/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/pqkVwmVsMOePo58AlmpXCQOOsGTqMahgbANhmP7WZMd9PiXLnzVxU06R+HbW0u+YdZ4w4aBDvVg+vUpGKydJg==",
-      "path": "microsoft.entityframeworkcore.abstractions/8.0.27",
-      "hashPath": "microsoft.entityframeworkcore.abstractions.8.0.27.nupkg.sha512"
+      "sha512": "sha512-hz/S8QO8W6J1fhaYca+HU9SV9ITJ3X2qNuP12ShSfWkp+0rSQSrkBuDFATRONTTqUOvvg8T7XLnylzKjBWPLTQ==",
+      "path": "microsoft.entityframeworkcore.abstractions/8.0.28",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.8.0.28.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/8.0.27": {
+    "Microsoft.EntityFrameworkCore.Analyzers/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9hl8QNHrgOtidE7I5aom9ABcXCIjv1fnRxgNNC4PaA043zPte28ifvkW2KK91OoAYF7trZSmU1qYScTra3N7HA==",
-      "path": "microsoft.entityframeworkcore.analyzers/8.0.27",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.27.nupkg.sha512"
+      "sha512": "sha512-OVp8TMfKp1ZNSLXeyZOlEITzHkQzJ9XDx0Mbf7bRfUE46mLRFsxBJEFxqTQieIu18Sg7sP0tX9K+PxvyVC8aqA==",
+      "path": "microsoft.entityframeworkcore.analyzers/8.0.28",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.28.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Design/8.0.27": {
+    "Microsoft.EntityFrameworkCore.Design/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Pe+TpzQTow3Ql1UFcQ7M8fJ7dpzfW4gVYtY/wWLMfArWWpDfKkDWhmJS5d02YZnDIl9rtfw0eMGqLy40pezUWg==",
-      "path": "microsoft.entityframeworkcore.design/8.0.27",
-      "hashPath": "microsoft.entityframeworkcore.design.8.0.27.nupkg.sha512"
+      "sha512": "sha512-WKAI6l+sX59/VzirT2nyjzXLu+btRX9GEXokd9Fdx3ONU3Cvi2Mj1zwcx2esLwKXYyng6ExaVwhiab/0+bN4mg==",
+      "path": "microsoft.entityframeworkcore.design/8.0.28",
+      "hashPath": "microsoft.entityframeworkcore.design.8.0.28.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/8.0.27": {
+    "Microsoft.EntityFrameworkCore.Relational/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ulztr0Jcvzg6bbL8wuwshVKcuU4GMeObvSJopg9KM/MBHwEcOroawdoYOJKmcmfmIp2dfXCl0n/qNRLfBfJwZg==",
-      "path": "microsoft.entityframeworkcore.relational/8.0.27",
-      "hashPath": "microsoft.entityframeworkcore.relational.8.0.27.nupkg.sha512"
+      "sha512": "sha512-caorpMYCkoRsL/lQuoK1lZwHIuaf+i0SBdQ19O/nIdblS8mFMakMrGo6NaglRZq5B209XMTOCw02L0zxBXt2hg==",
+      "path": "microsoft.entityframeworkcore.relational/8.0.28",
+      "hashPath": "microsoft.entityframeworkcore.relational.8.0.28.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",
@@ -1091,6 +1103,13 @@
       "sha512": "sha512-jC5wkRe8K6HPoDENUws+fl2d7+GKz+ky8SWEDzYzPx6hHt2EwxWm01gmYPWLzlT49jfYYap0guB5bExtyX9aIQ==",
       "path": "stackexchange.redis/2.13.1",
       "hashPath": "stackexchange.redis.2.13.1.nupkg.sha512"
+    },
+    "StackExchange.Redis.Extensions.Core/12.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FQfcwsgw56mIzr7AD1OeaHEq6Tpf1MPo+SoMNjefQbB3FX8njbBL0uiwQK8XLG0Cew76P7H5moTVX88YrFVoYQ==",
+      "path": "stackexchange.redis.extensions.core/12.2.0",
+      "hashPath": "stackexchange.redis.extensions.core.12.2.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.6.2": {
       "type": "package",

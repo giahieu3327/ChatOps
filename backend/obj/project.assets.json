@@ -435,11 +435,11 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/8.0.27": {
+      "Microsoft.EntityFrameworkCore/8.0.28": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.27",
-          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.27",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.28",
+          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.28",
           "Microsoft.Extensions.Caching.Memory": "8.0.1",
           "Microsoft.Extensions.Logging": "8.0.1"
         },
@@ -457,7 +457,7 @@
           "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Abstractions/8.0.28": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -470,7 +470,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Analyzers/8.0.28": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -479,12 +479,12 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Design/8.0.28": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.5.0",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.27",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.28",
           "Microsoft.Extensions.DependencyModel": "8.0.2",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -502,10 +502,10 @@
           "build/net8.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/8.0.27": {
+      "Microsoft.EntityFrameworkCore.Relational/8.0.28": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.27",
+          "Microsoft.EntityFrameworkCore": "8.0.28",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         },
         "compile": {
@@ -918,6 +918,18 @@
           "lib/net8.0/StackExchange.Redis.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "StackExchange.Redis.Extensions.Core/12.2.0": {
+        "type": "package",
+        "dependencies": {
+          "StackExchange.Redis": "2.12.14"
+        },
+        "compile": {
+          "lib/net8.0/StackExchange.Redis.Extensions.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/StackExchange.Redis.Extensions.Core.dll": {}
         }
       },
       "Swashbuckle.AspNetCore/6.6.2": {
@@ -1883,10 +1895,10 @@
         "microsoft.codeanalysis.workspaces.common.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore/8.0.27": {
-      "sha512": "fe3vhlibOcspurgPucQQW4KGC3Z2aj3hafb68AKxFVFawzT5+x6FA4NGzLrWMDs682A3uTodd0hOHX0ZUDwdzA==",
+    "Microsoft.EntityFrameworkCore/8.0.28": {
+      "sha512": "rC28OvTXi/6+C8cisqZ/dr69aP8d0suvkFkGu2dBHa4UFwPZVt9cqni4pYwp9Hd3CuJ+NRDCn7YtwSexoBn/Hw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/8.0.27",
+      "path": "microsoft.entityframeworkcore/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1895,14 +1907,14 @@
         "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.8.0.27.nupkg.sha512",
+        "microsoft.entityframeworkcore.8.0.28.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/8.0.27": {
-      "sha512": "/pqkVwmVsMOePo58AlmpXCQOOsGTqMahgbANhmP7WZMd9PiXLnzVxU06R+HbW0u+YdZ4w4aBDvVg+vUpGKydJg==",
+    "Microsoft.EntityFrameworkCore.Abstractions/8.0.28": {
+      "sha512": "hz/S8QO8W6J1fhaYca+HU9SV9ITJ3X2qNuP12ShSfWkp+0rSQSrkBuDFATRONTTqUOvvg8T7XLnylzKjBWPLTQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/8.0.27",
+      "path": "microsoft.entityframeworkcore.abstractions/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1910,14 +1922,14 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.8.0.27.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.8.0.28.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/8.0.27": {
-      "sha512": "9hl8QNHrgOtidE7I5aom9ABcXCIjv1fnRxgNNC4PaA043zPte28ifvkW2KK91OoAYF7trZSmU1qYScTra3N7HA==",
+    "Microsoft.EntityFrameworkCore.Analyzers/8.0.28": {
+      "sha512": "OVp8TMfKp1ZNSLXeyZOlEITzHkQzJ9XDx0Mbf7bRfUE46mLRFsxBJEFxqTQieIu18Sg7sP0tX9K+PxvyVC8aqA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/8.0.27",
+      "path": "microsoft.entityframeworkcore.analyzers/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1925,14 +1937,14 @@
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.analyzers.8.0.27.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.8.0.28.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/8.0.27": {
-      "sha512": "Pe+TpzQTow3Ql1UFcQ7M8fJ7dpzfW4gVYtY/wWLMfArWWpDfKkDWhmJS5d02YZnDIl9rtfw0eMGqLy40pezUWg==",
+    "Microsoft.EntityFrameworkCore.Design/8.0.28": {
+      "sha512": "WKAI6l+sX59/VzirT2nyjzXLu+btRX9GEXokd9Fdx3ONU3Cvi2Mj1zwcx2esLwKXYyng6ExaVwhiab/0+bN4mg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/8.0.27",
+      "path": "microsoft.entityframeworkcore.design/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1941,14 +1953,14 @@
         "build/net8.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.8.0.27.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.8.0.28.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/8.0.27": {
-      "sha512": "ulztr0Jcvzg6bbL8wuwshVKcuU4GMeObvSJopg9KM/MBHwEcOroawdoYOJKmcmfmIp2dfXCl0n/qNRLfBfJwZg==",
+    "Microsoft.EntityFrameworkCore.Relational/8.0.28": {
+      "sha512": "caorpMYCkoRsL/lQuoK1lZwHIuaf+i0SBdQ19O/nIdblS8mFMakMrGo6NaglRZq5B209XMTOCw02L0zxBXt2hg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/8.0.27",
+      "path": "microsoft.entityframeworkcore.relational/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1956,7 +1968,7 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.8.0.27.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.8.0.28.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
@@ -2839,6 +2851,26 @@
         "stackexchange.redis.nuspec"
       ]
     },
+    "StackExchange.Redis.Extensions.Core/12.2.0": {
+      "sha512": "FQfcwsgw56mIzr7AD1OeaHEq6Tpf1MPo+SoMNjefQbB3FX8njbBL0uiwQK8XLG0Cew76P7H5moTVX88YrFVoYQ==",
+      "type": "package",
+      "path": "stackexchange.redis.extensions.core/12.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/.xml",
+        "lib/net10.0/StackExchange.Redis.Extensions.Core.dll",
+        "lib/net8.0/.xml",
+        "lib/net8.0/StackExchange.Redis.Extensions.Core.dll",
+        "lib/net9.0/.xml",
+        "lib/net9.0/StackExchange.Redis.Extensions.Core.dll",
+        "lib/netstandard2.1/.xml",
+        "lib/netstandard2.1/StackExchange.Redis.Extensions.Core.dll",
+        "stackexchange.redis.extensions.core.12.2.0.nupkg.sha512",
+        "stackexchange.redis.extensions.core.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/6.6.2": {
       "sha512": "+NB4UYVYN6AhDSjW0IJAd1AGD8V33gemFNLPaxKTtPkHB+HaKAKf9MGAEUPivEWvqeQfcKIw8lJaHq6LHljRuw==",
       "type": "package",
@@ -3425,24 +3457,25 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.*",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.*",
       "StackExchange.Redis >= 2.13.1",
+      "StackExchange.Redis.Extensions.Core >= 12.2.0",
       "Swashbuckle.AspNetCore >= 6.6.2",
       "YamlDotNet >= 17.1.0"
     ]
   },
   "packageFolders": {
-    "/home/ubuntu/.nuget/packages/": {}
+    "/home/chatopsnode1/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ubuntu/ChatOps/backend/ChatOps.csproj",
+      "projectUniqueName": "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj",
       "projectName": "ChatOps",
-      "projectPath": "/home/ubuntu/ChatOps/backend/ChatOps.csproj",
-      "packagesPath": "/home/ubuntu/.nuget/packages/",
-      "outputPath": "/home/ubuntu/ChatOps/backend/obj/",
+      "projectPath": "/home/chatopsnode1/ChatOps/backend/ChatOps.csproj",
+      "packagesPath": "/home/chatopsnode1/.nuget/packages/",
+      "outputPath": "/home/chatopsnode1/ChatOps/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+        "/home/chatopsnode1/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3500,6 +3533,10 @@
             "target": "Package",
             "version": "[2.13.1, )"
           },
+          "StackExchange.Redis.Extensions.Core": {
+            "target": "Package",
+            "version": "[12.2.0, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.6.2, )"
@@ -3528,7 +3565,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.127/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.128/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
