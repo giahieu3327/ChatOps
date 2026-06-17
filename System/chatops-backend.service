@@ -1,13 +1,24 @@
 [Unit]
-Description=ChatOps Backend (.NET)
-After=network.target
+Description=ChatOps Backend Management API Service
+After=network.target postgresql.service redis-server.service
 
 [Service]
-WorkingDirectory=/home/ubuntu/ChatOps/backend
-ExecStart=/usr/bin/dotnet run --urls "http://0.0.0.0:5000"
+WorkingDirectory=/home/chatopsnode1/ChatOps/backend
+ExecStart=/usr/bin/dotnet run --project /home/chatopsnode1/ChatOps/backend/ChatOps.csproj --urls=http://0.0.0.0:5000
 Restart=always
-User=ubuntu
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=chatops-backend
+User=chatopsnode1
 Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+Environment=ConnectionStrings__DefaultConnection="Host=192.168.1.29;Port=5432;Database=chatopsdb;Username=sa;Password=MyChatOpsPassword999983"
+Environment=CHATOPS_SERVER_DOMAIN=nt113q22nhom12.ddns.net
+Environment=CHATOPS_SERVER_IP=192.168.1.29
+Environment=CHATOPS_SERVER_ID=1
+Environment=CHATOPS_NODE_TYPE=both
+Environment=CHATOPS_REDIS_IP=192.168.1.29
+Environment=CHATOPS_REDIS_HOST=192.168.1.29:6379
 
 [Install]
 WantedBy=multi-user.target

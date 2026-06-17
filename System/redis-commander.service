@@ -1,0 +1,15 @@
+[Unit]
+Description=Redis Commander Web Management Interface
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+User=root
+Environment=PATH=/usr/bin:/usr/local/bin:/usr/local/node/bin
+ExecStart=/usr/local/bin/redis-commander --redis-host 127.0.0.1 --redis-port 6379 --address 0.0.0.0
+Restart=always
+RestartSec=5
+SyslogIdentifier=redis-commander
+
+[Install]
+WantedBy=multi-user.target

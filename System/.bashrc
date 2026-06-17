@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -116,19 +116,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# =====================================================
-# CHATOPS SYSTEM MANAGEMENT ALIASES & FUNCTIONS (FIXED)
-# =====================================================
-
-# Hàm quản lý restart dịch vụ
 restart() {
     if [ "$1" = "backend" ]; then
         echo "🔄 Đang khởi động lại ChatOps Backend..."
         sudo systemctl restart chatops-backend && echo "✅ Backend đã được khởi động lại!"
     elif [ "$1" = "frontend" ]; then
         echo "🔄 Kiểm tra cấu hình và nạp lại OpenResty (Frontend)..."
-        # Kiểm tra cú pháp cấu hình trước, nếu OK mới thực hiện reload dịch vụ an toàn
-        if sudo openresty -t; then
+        if sudo /usr/local/openresty/nginx/sbin/nginx -t; then
             sudo systemctl reload openresty && echo "✅ OpenResty đã nạp lại cấu hình thành công!"
         else
             echo "❌ Cấu hình OpenResty bị lỗi! Không thể reload."
@@ -140,11 +134,10 @@ restart() {
         echo "🔄 Đang khởi động lại Redis Commander Web..."
         sudo systemctl restart redis-commander && echo "✅ Redis Commander đã khởi động lại!"
     else
-        echo "❌ Dùng: restart backend | frontend | redis | commander"
+        echo "❌ Dùng sai cú pháp! Định dạng đúng: restart backend | frontend | redis | commander"
     fi
 }
 
-# Hàm quản lý bật dịch vụ
 start() {
     if [ "$1" = "backend" ]; then
         sudo systemctl start chatops-backend && echo "▶️ Đã bật Backend."
@@ -156,11 +149,10 @@ start() {
     elif [ "$1" = "commander" ]; then
         sudo systemctl start redis-commander && echo "▶️ Đã bật Redis Commander Web."
     else
-        echo "❌ Dùng: start backend | frontend | redis | commander"
+        echo "❌ Dùng sai cú pháp! Định dạng đúng: start backend | frontend | redis | commander"
     fi
 }
 
-# Hàm quản lý tắt dịch vụ
 stop() {
     if [ "$1" = "backend" ]; then
         sudo systemctl stop chatops-backend && echo "⏹️ Đã tắt Backend."
@@ -173,11 +165,10 @@ stop() {
     elif [ "$1" = "commander" ]; then
         sudo systemctl stop redis-commander && echo "⏹️ Đã tắt Redis Commander Web."
     else
-        echo "❌ Dùng: stop backend | frontend | redis | commander"
+        echo "❌ Dùng sai cú pháp! Định dạng đúng: stop backend | frontend | redis | commander"
     fi
 }
 
-# Hàm xem logs dịch vụ
 logs() {
     if [ "$1" = "backend" ]; then
         journalctl -u chatops-backend -n 50 -f
@@ -202,6 +193,6 @@ logs() {
         echo "📋 Đang xem log của Redis Commander Web..."
         sudo journalctl -u redis-commander -n 50 -f
     else
-        echo "❌ Dùng: logs backend | frontend | error | redis | commander"
+        echo "❌ Dùng sai cú pháp! Định dạng đúng: logs backend | frontend | error | redis | commander"
     fi
 }

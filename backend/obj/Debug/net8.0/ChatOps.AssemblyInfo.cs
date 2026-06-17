@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChatOps")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7022a0691ead682869976282f22e9bec18c0abd8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+da949585b40ec13d5d0e99e66fb6c44b30dd4df5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChatOps")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChatOps")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
