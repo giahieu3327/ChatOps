@@ -1,4 +1,9 @@
-﻿using System.Text.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
 using ChatOps.Models;
 using ChatOps.Services.RedisService;
 using ChatOps.Services.SystemService;
@@ -103,7 +108,9 @@ namespace ChatOps.Services.ChatService
 
             await SendLogWithDelayAsync(session.Debug, connectionId, $"⏳ [Node {AppContext.ServerID}] Đang xác định hồ sơ tệp cấu hình của cụm dịch vụ {app}...");
 
-            string runtimeDir = $"/home/ubuntu/ChatOps/docker/Apps/{instance}";
+            // ĐỘNG HÓA ĐƯỜNG DẪN RUNTIME THƯ MỤC APPS
+            string userHome = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string runtimeDir = Path.Combine(userHome, "ChatOps", "docker", "Apps", instance);
             string coreComposeFile = "docker-registry.yml";
 
             if (!File.Exists(Path.Combine(runtimeDir, coreComposeFile)))
@@ -190,7 +197,7 @@ namespace ChatOps.Services.ChatService
                          $"📄 Core Profile: `{coreComposeFile}`\n" +
                          $"⚖️ LB Profile: `{lbComposeFile}`\n\n";
 
-            string cdCmd = $"cd {runtimeDir}";
+            string cdCmd = $"cd \"{runtimeDir}\"";
             bool needScaleLb = (typeStr == "lb" || typeStr == "all");
             int[] ports = Array.Empty<int>();
 
