@@ -219,10 +219,10 @@ namespace ChatOps.Services
             }
 
             // BƯỚC 6: Tiến hành dò tìm hoặc Thẩm định dải cổng tĩnh (Nếu có static port hoặc neededCount > 0)
-            return await AllocateClusterPortsAsync(payload, candidateNodes, neededCount, forcedNodeIp, AppContext.ServerIP, connectionId, isStaticMode, session);
+            return await AllocateClusterPortsAsync(baseCmd, payload, candidateNodes, neededCount, forcedNodeIp, AppContext.ServerIP, connectionId, isStaticMode, session);
         }
 
-        private static async Task<RoutingResult> AllocateClusterPortsAsync(Dictionary<string, string> payload, List<(string NodeIp, int ContainerCount)> candidateNodes, int neededCount, string? forcedNodeIp, string serverIp, string connectionId, bool isStaticMode, UserSession session)
+        private static async Task<RoutingResult> AllocateClusterPortsAsync(string baseCmd, Dictionary<string, string> payload, List<(string NodeIp, int ContainerCount)> candidateNodes, int neededCount, string? forcedNodeIp, string serverIp, string connectionId, bool isStaticMode, UserSession session)
         {
             var redisDb = ChatOps.Data.AppContext.RedisDB;
             var userPorts = new List<int>();
@@ -241,8 +241,18 @@ namespace ChatOps.Services
                     userPorts.Add(parsedPort);
                 }
 
-                string neededCountStr = payload.GetValueOrDefault("neededCount", "0").Trim().ToLower();  
-                int expectedCount = int.Parse(neededCountStr);
+                string neededCountStr = "";  
+                int expectedCount = 0;
+                if(baseCmd == "deploy")
+                {
+                    neededCountStr = payload.GetValueOrDefault("neededCount", "0").Trim().ToLower();  
+                    expectedCount = int.Parse(neededCountStr);
+                }
+                else
+                {
+                    expectedCount = neededCount;
+                }
+
                 if (userPorts.Count != expectedCount)
                     return new RoutingResult { IsError = true, IsForwarding = false, ErrorMessage = $"Số lượng cổng nhập vào không khớp với yêu cầu hệ thống ({expectedCount} cổng)." };
 
