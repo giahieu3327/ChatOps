@@ -9,13 +9,13 @@ namespace ChatOps.Data
     public static class AppContext
     {
         // Tự động lấy từ môi trường hệ thống, nếu null hoặc trống thì dùng giá trị mặc định
-        public static string ServerDomain { get; set; } = GetEnv("CHATOPS_SERVER_DOMAIN", "nt113q22nhom12.ddns.net");
-        public static string ServerIP { get; set; } = GetEnv("CHATOPS_SERVER_IP", "192.168.1.8");
+        public static string ServerDomain { get; set; } = GetEnv("CHATOPS_SERVER_DOMAIN", "chatopsnet.cloud-ip.cc");
+        public static string ServerIP { get; set; } = GetEnv("CHATOPS_SERVER_IP", "192.168.1.29");
         public static string ServerID { get; set; } = GetEnv("CHATOPS_SERVER_ID", "1");
         
         // Giải quyết triệt để phần IP máy chủ Redis
-        public static string RedisIP { get; set; } = GetEnv("CHATOPS_REDIS_IP", "192.168.1.8");
-        public static string RedisHost { get; set; } = GetEnv("CHATOPS_REDIS_HOST", "192.168.1.8:6379");
+        public static string RedisIP { get; set; } = GetEnv("CHATOPS_REDIS_IP", "192.168.1.29");
+        public static string RedisHost { get; set; } = GetEnv("CHATOPS_REDIS_HOST", "192.168.1.29:6379");
         
         public static string NodeComponentType { get; set; } = GetEnv("CHATOPS_NODE_TYPE", "both");
 
